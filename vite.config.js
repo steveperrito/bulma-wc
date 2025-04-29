@@ -4,8 +4,8 @@ export default defineConfig({
   build: {
     lib: {
       entry: 'lib/main.js',
-      name: 'cpage-ui',
-      fileName: (format) => `cpage-ui.${format}.js`,
+      name: 'bulma-wc',
+      fileName: (format) => `bulma-wc.${format}.js`,
       formats: ['es'],
     },
     minify: false,
