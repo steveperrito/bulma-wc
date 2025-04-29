@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" class="--bulma-build" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link class="--bulma-build" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+    <title>Bulma Lit Components</title>
+  </head>
+  <body>
+    <div id="app">
+      <div class="section">
+        <h1 class="title is-1">Bulma + Lit</h1>
+        <p class="subtitle is-6">
+          Simple <code>LitElement</code> components compatible with a single Bulma css file (<em>or custom build</em>).
+        </p>
+
+        <hr>
+
+        <div class="box">
+          <h3 class="title is-3">Modal</h3>
+          <button class="button" id="open-modal">Open Modal</button>
+          <bulma-modal id="modal">
+            <h2>Modal content!</h2>
+          </bulma-modal>
+        </div>
+
+        <div class="box">
+          <h3 class="title is-3">BreadCrumbs</h3>
+          <div id="breadcrumbs">
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="module">
+      import { html, render } from 'lit';
+      import { BulmaModal, BulmaBreadcrumbs, registerWebComponents } from './lib/main.js';
+
+      // Register the custom elements
+      registerWebComponents({
+        BulmaModal,
+        BulmaBreadcrumbs,
+      });
+
+      document.getElementById('open-modal').addEventListener('click', () => {
+        let modal = document.getElementById('modal');
+        let status = Boolean(modal.getAttribute('is-active'));
+
+        modal.setAttribute('is-active', (!status).toString());
+      });
+
+      let breadcrumbs = html`<bulma-breadcrumbs
+        alignment="centered"
+        size="medium"
+        .items="${[
+          {
+            label: 'Home',
+            url: '#',
+            icon: 'fa fa-home',
+          },
+          {
+            label: 'Library',
+            url: '#',
+            icon: 'fa fa-book',
+          },
+          {
+            label: 'Data',
+            url: '#',
+            icon: 'fa fa-database',
+          },
+          {
+            label: 'Settings',
+            url: '#',
+            icon: 'fa fa-cog',
+          },
+          {
+            label: 'Profile',
+            url: '#',
+            icon: 'fa fa-user',
+          }]}">
+
+      </bulma-breadcrumbs>`;
+
+      render(breadcrumbs, document.getElementById('breadcrumbs'));
+
+    </script>
+  </body>
+</html>
